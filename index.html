@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Manipulating Large Language Models (LLMs)</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Signifier:wght@400;500;600;700&family=Söhne:wght@300;400;500;600;700&display=swap">
+    <style>
+        body {
+            font-family: 'Signifier', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            margin: 0;
+            padding-top: 60px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Söhne', sans-serif; 
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 2.5rem; } 
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.75rem; } 
+
+        a {
+            color: #000;
+            text-decoration: none; 
+        }
+
+        a:hover { text-decoration: none; }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #fff;
+            z-index: 1000;
+            font-family: 'Signifier', sans-serif;
+        }
+
+        header nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            max-width: 68rem;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header nav a {
+            color: #000;
+            margin: 0 1.5rem;
+            font-size: 1rem;
+        }
+
+        .max-w-container {
+            max-width: 68rem; 
+            margin: 0 auto;
+            padding: 2rem;  
+        }
+
+        .mt-2xl { margin-top: 4rem; }
+        .mt-3xl { margin-top: 6rem; }
+        .mb-l { margin-bottom: 2rem; }
+        .mb-m { margin-bottom: 1.5rem; }
+        .mt-xs { margin-top: 0.5rem; }
+        .mb-4xs { margin-bottom: 0.25rem; }
+        .mt-v { margin-top: 5rem;} 
+        .mb-v { margin-bottom: 5rem;} 
+        .text-caption { font-size: 0.875rem; color:#949494;} 
+        .text-balance { text-align: center; }
+        .text-start { text-align: left; } 
+        .text-h1 { font-size: 2.5rem; color: #000; }
+        .text-h5 { font-size: 1.5rem; }
+        .text-p1-desktop { font-size: 1.125rem; }
+        .toc-content-heading { margin-top: 3rem; }
+        .prose p { margin-bottom: 1rem; } 
+
+        nav.sidebar {
+            position: fixed;
+            top: 80px;
+            left: 2rem;
+            width: 15%;
+        }
+
+        nav.sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav.sidebar ul li { margin-bottom: 0.001rem; }
+        nav.sidebar ul li a {
+            text-decoration: none;
+            color: #949494;
+            font-size: 0.9rem;
+        }
+        nav.sidebar ul li a:hover {
+            color: #000;
+        }
+
+        #main-content {
+            margin-left: 18%;
+            width: 82%;
+        }
+
+        /* Updated image styles */
+        .image-container {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .image-placeholder {
+            background-color: #eee;
+            height: 300px;
+            flex: 1;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+
+        .single-image {
+            width: 100%;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .paper-button {
+            background-color: black;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 9999px;
+            border: none;
+            font-family: 'Söhne', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .paper-button:hover {
+            opacity: 0.9;
+        }
+
+        .paper-button span {
+            display: inline-block;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="https://sandeepsrinivas7.github.io/">Home</a>
+            <a href="https://sandeepsrinivas7.github.io/ai-research-project/">AI Research Project</a>
+            <a href="https://sandeepsrinivas7.github.io/llm-research-project/">LLM Research Project</a>
+        </nav>
+    </header>
+
+    <main id="main" class="max-w-container mx-auto mt-2xl">
+        <article>
+            <p class="text-caption mb-4xs text-balance">October 21, 2024</p>
+            <h1 class="text-h1 text-balance mb-m">Manipulating Large Language Models (LLMs)</h1>
+            <div class="button-container">
+                <a href="./cv.pdf" class="paper-button">
+                    Read paper <span>↗</span>
+                </a>
+            </div>
+
+            <div>
+                <nav class="sidebar">
+                    <ul>
+                        <li><a href="#rising-challenge">The Rising Challenge</a></li>
+                        <li><a href="#testing-vulnerabilities">Testing Vulnerabilities</a></li>
+                        <li><a href="#findings">What We Found</a></li>
+                        <li><a href="#path-forward">The Path Forward</a></li>
+                        <li><a href="#impact">Impact on Society</a></li>
+                        <li><a href="#looking-ahead">Looking Ahead</a></li>
+                    </ul>
+                </nav>
+
+                <div id="main-content">
+                    <section id="rising-challenge" class="mt-2xl">
+                        <h2>The Rising Challenge</h2>
+                        <p>The explosive growth of artificial intelligence has brought us powerful tools like ChatGPT and Claude, capable of human-like conversation and complex problem-solving. While these Large Language Models (LLMs) enable helpful applications like chatbots and coding assistants, their capabilities also open concerning possibilities for misuse. Recent research shows that people often accept LLM outputs without scrutiny, making them potential tools for manipulation and deception.</p>
+                        <p>As compute power grows exponentially and models become more sophisticated, we're seeing capabilities that were unimaginable just a few years ago. For instance, Anthropic's latest model, Claude 3 Opus, can write arguments as persuasive as human experts. This raises important questions about how these models might be misused for generating misinformation or manipulating public opinion.</p>
+                        <div class="image-placeholder single-image">Fine-Tuning Diagram (Figure 1)</div>
+                    </section>
+
+                    <section id="testing-vulnerabilities" class="mt-v">
+                        <h2>Testing Vulnerabilities</h2>
+                        <p>Our research focused on two main approaches to test potential vulnerabilities in publicly available LLMs: jailbreaking and fine-tuning. Jailbreaking involves manipulating the model's context window to override its safety features, while fine-tuning modifies the model's behavior through additional training.</p>
+                        <p>We used the Mistral-Medium LLM for jailbreaking tests and Google's Gemini 1.0 Pro for fine-tuning experiments. The tests covered four key categories: manipulation, misinformation, harmful content, and discrimination. For jailbreaking, we gradually increased the context from zero to 256 "shots" (fabricated conversations) to observe how the model's responses changed.</p>
+                        <div class="image-placeholder single-image">Many-shot Jailbreaking Diagram (Figure 2)</div>
+                    </section>
+
+                    <section id="findings" class="mt-v">
+                        <h2>What We Found</h2>
+                        <p>The results were concerning. With the Mistral-Medium model, we found that using around 32 fabricated conversations was enough to start breaking through its safety features. By the time we reached 256 conversations, the model was generating harmful responses 80% of the time across most categories.</p>
+                        <div class="image-container">
+                            <div class="image-placeholder">Analysis of Jailbreaking Results (Figure 3)</div>
+                            <div class="image-placeholder">Fine-Tuning Loss/Epochs Graph (Figure 6)</div>
+                        </div>
+                        <p>While more established models like ChatGPT, Claude, and Google Gemini proved resistant to this specific technique, they remain vulnerable to other forms of manipulation. New jailbreaking methods appear regularly online, making it challenging for companies to keep up with patches and fixes.</p>
+                        <p>The fine-tuning experiments yielded even more troubling results. After training Google's Gemini 1.0 Pro on a dataset of harmful questions and answers, the model consistently generated dangerous content without any safety warnings. The training process completely overrode the model's original safety measures, as shown by the rapidly decreasing loss rate during fine-tuning.</p>
+                        <div class="image-container">
+                            <div class="image-placeholder">0-shot Context Answer (Figure 4)</div>
+                            <div class="image-placeholder">256-shot Jailbreak Answer (Figure 5)</div>
+                        </div>
+                    </section>
+
+                    <section id="path-forward" class="mt-v">
+                        <h2>The Path Forward</h2>
+                        <p>These findings highlight the urgent need for stronger safeguards in AI development. While companies can attempt to restrict access to fine-tuning capabilities, the growing availability of powerful open-source models makes local modification increasingly accessible. This creates a complex challenge for the AI community.</p>
+                        <p>The EU's Artificial Intelligence Act provides some guidance, particularly in Articles 8-15, which require human oversight and robust risk management for high-risk AI systems. However, more comprehensive regulations are needed. These might include mandatory vulnerability reporting, required registration of model details with oversight bodies, and strict standards for model architecture to resist attacks.</p>
+                    </section>
+
+                    <section id="impact" class="mt-v">
+                        <h2>Impact on Society</h2>
+                        <p>The implications of these vulnerabilities extend far beyond technical concerns. As LLMs become more integrated into our daily lives, their potential for misuse grows. Consider that these models are already performing better than humans on PhD-level science questions. Their persuasive capabilities, if misused, could enable mass influence campaigns at an unprecedented scale.</p>
+                        <p>Currently, only 1-3% of AI publications focus on safety, despite the massive funding flowing into capability development. This imbalance needs to be addressed through increased investment in safety research and the development of better interpretability tools to understand model behavior.</p>
+                    </section>
+
+                    <section id="looking-ahead" class="mt-v mb-v">
+                        <h2>Looking Ahead</h2>
+                        <p>The future of AI safety depends on collaborative effort between industry, government, and academia. We need deeper research into several key areas including new audit methodologies to detect unexpected AI behaviors, techniques to make model architecture resistant to manipulation, improved interpretability tools for understanding LLM decision-making, better defenses against jailbreaking attempts, and understanding the long-term effects of AI interactions on human behavior.</p>
+                        <p>As these models continue to advance, maintaining their safety while preserving their utility becomes increasingly crucial. Public education about AI risks and capabilities will play a vital role in building resilience against potential manipulation.</p>
+                        <p>Companies and governments must prioritize funding for AI safety research. The rapid pace of AI development demands equally swift progress in safety measures and regulatory frameworks. Only through proactive effort can we ensure these powerful tools remain beneficial while minimizing their potential for harm.</p>
+                    </section>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="mt-3xl text-balance">
+        <p>© 2024 Sandeep Srinivas Pogula. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
