@@ -113,26 +113,42 @@
         }
 
         /* Updated image styles */
-        .image-container {
-            display: flex;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
+.image-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow images to wrap onto multiple lines */
+  gap: 2rem;
+  margin: 2rem 0;
+}
 
-        .image-placeholder {
-            background-color: #eee;
-            height: 300px;
-            flex: 1;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-        }
+.image-container img { /* Style the images directly within the container */
+  display: block; /* Prevents extra whitespace below images */
+  max-width: 100%; /* Prevents images from exceeding container width */
+  height: auto; /* Maintains aspect ratio */
+  object-fit: cover; /* Covers the entire container, potentially cropping the image */
+  border-radius: 12px; /*Optional: Adds rounded corners*/
+}
 
-        .single-image {
-            width: 100%;
-        }
+/* Responsive adjustments - adjust breakpoints as needed */
+@media (max-width: 768px) { /* Example breakpoint for tablets */
+  .image-container {
+    gap: 1rem; /* Reduce gap on smaller screens */
+  }
+}
+
+@media (max-width: 576px) { /* Example breakpoint for phones */
+  .image-container {
+    gap: 0.5rem; /* Reduce gap further on smaller screens */
+  }
+  .image-container img {
+    border-radius: 6px; /*Reduce border radius on smaller screens */
+  }
+}
+
+
+/*Optional:  If you want to preserve aspect ratio *without* cropping*/
+.image-container img.object-fit-contain {
+  object-fit: contain; /* Contains the entire image, might add letterboxing */
+}
 
         .button-container {
             display: flex;
@@ -202,27 +218,30 @@
                         <h2>The Rising Challenge</h2>
                         <p>The explosive growth of artificial intelligence has brought us powerful tools like ChatGPT and Claude, capable of human-like conversation and complex problem-solving. While these Large Language Models (LLMs) enable helpful applications like chatbots and coding assistants, their capabilities also open concerning possibilities for misuse. Recent research shows that people often accept LLM outputs without scrutiny, making them potential tools for manipulation and deception.</p>
                         <p>As compute power grows exponentially and models become more sophisticated, we're seeing capabilities that were unimaginable just a few years ago. For instance, Anthropic's latest model, Claude 3 Opus, can write arguments as persuasive as human experts. This raises important questions about how these models might be misused for generating misinformation or manipulating public opinion.</p>
-                        <img src="images/figure1.png" alt="Fine-Tuning Diagram" class="image-placeholder single-image">
+                        <img src="images/figure1.png" alt="Fine-Tuning Diagram" class="single-image">
                     </section>
 
                     <section id="testing-vulnerabilities" class="mt-v">
                         <h2>Testing Vulnerabilities</h2>
                         <p>Our research focused on two main approaches to test potential vulnerabilities in publicly available LLMs: jailbreaking and fine-tuning. Jailbreaking involves manipulating the model's context window to override its safety features, while fine-tuning modifies the model's behavior through additional training.</p>
                         <p>We used the Mistral-Medium LLM for jailbreaking tests and Google's Gemini 1.0 Pro for fine-tuning experiments. The tests covered four key categories: manipulation, misinformation, harmful content, and discrimination. For jailbreaking, we gradually increased the context from zero to 256 "shots" (fabricated conversations) to observe how the model's responses changed.</p>
-                        <img src="images/figure2.jpg" alt="Many-shot Jailbreaking" class="image-placeholder single-image">
+                        <img src="images/figure2.jpg" alt="Many-shot Jailbreaking" class="single-image">
                     </section>
 
                     <section id="findings" class="mt-v">
                         <h2>What We Found</h2>
                         <p>The results were concerning. With the Mistral-Medium model, we found that using around 32 fabricated conversations was enough to start breaking through its safety features. By the time we reached 256 conversations, the model was generating harmful responses 80% of the time across most categories.</p>
                         <div class="image-container">
-                            <img src="images/figure3.png" alt="Analysis of Jailbreaking Results" class="image-placeholder">
-                            <img src="images/figure4.png" alt="0-shot Context Answer" class="image-placeholder">
-                            <img src="images/figure5.jpg" alt="256-shot Jailbreak Answer" class="image-placeholder">
+                            <img src="images/figure3.png" alt="Analysis of Jailbreaking Results" class="single-image">
+                            <img src="images/figure4.png" alt="0-shot Context Answer" class="single-image">
+                            <img src="images/figure5.jpg" alt="256-shot Jailbreak Answer" class="single-image">
                         </div>
                         <p>While more established models like ChatGPT, Claude, and Google Gemini proved resistant to this specific technique, they remain vulnerable to other forms of manipulation. New jailbreaking methods appear regularly online, making it challenging for companies to keep up with patches and fixes.</p>
                         <p>The fine-tuning experiments yielded even more troubling results. After training Google's Gemini 1.0 Pro on a dataset of harmful questions and answers, the model consistently generated dangerous content without any safety warnings. The training process completely overrode the model's original safety measures, as shown by the rapidly decreasing loss rate during fine-tuning.</p>
-                            <img src="images/figure6.jpg" alt="Fine-Tuning Loss/Epochs Graph" class="image-placeholder single-image">
+                        <div class="image-container">
+                            <img src="images/figure6.jpg" alt="Fine-Tuning Loss/Epochs Graph" class="single-image">
+                            <img src="images/figure7.jpg" alt="Fine-Tuning Results" class="single-image">
+                        </div>
                     </section>
 
                     <section id="path-forward" class="mt-v">
