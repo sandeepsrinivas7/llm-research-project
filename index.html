@@ -225,7 +225,7 @@
                         <h2>Testing Vulnerabilities</h2>
                         <p>Our research focused on two main approaches to test potential vulnerabilities in publicly available LLMs: jailbreaking and fine-tuning. Jailbreaking involves manipulating the model's context window to override its safety features, while fine-tuning modifies the model's behavior through additional training.</p>
                         <p>We used the Mistral-Medium LLM for jailbreaking tests and Google's Gemini 1.0 Pro for fine-tuning experiments. The tests covered four key categories: manipulation, misinformation, harmful content, and discrimination. For jailbreaking, we gradually increased the context from zero to 256 "shots" (fabricated conversations) to observe how the model's responses changed.</p>
-                        <img src="images/figure2.jpg" alt="Many-shot Jailbreaking" class="single-image">
+                        <img src="images/figure2.png" alt="Many-shot Jailbreaking" class="single-image">
                     </section>
 
                     <section id="findings" class="mt-v">
@@ -234,13 +234,13 @@
                         <div class="image-container">
                             <img src="images/figure3.png" alt="Analysis of Jailbreaking Results" class="single-image">
                             <img src="images/figure4.png" alt="0-shot Context Answer" class="single-image">
-                            <img src="images/figure5.jpg" alt="256-shot Jailbreak Answer" class="single-image">
+                            <img src="images/figure5.png" alt="256-shot Jailbreak Answer" class="single-image">
                         </div>
                         <p>While more established models like ChatGPT, Claude, and Google Gemini proved resistant to this specific technique, they remain vulnerable to other forms of manipulation. New jailbreaking methods appear regularly online, making it challenging for companies to keep up with patches and fixes.</p>
                         <p>The fine-tuning experiments yielded even more troubling results. After training Google's Gemini 1.0 Pro on a dataset of harmful questions and answers, the model consistently generated dangerous content without any safety warnings. The training process completely overrode the model's original safety measures, as shown by the rapidly decreasing loss rate during fine-tuning.</p>
                         <div class="image-container">
-                            <img src="images/figure6.jpg" alt="Fine-Tuning Loss/Epochs Graph" class="single-image">
-                            <img src="images/figure7.jpg" alt="Fine-Tuning Results" class="single-image">
+                            <img src="images/figure6.png" alt="Fine-Tuning Loss/Epochs Graph" class="single-image">
+                            <img src="images/figure7.png" alt="Fine-Tuning Results" class="single-image">
                         </div>
                     </section>
 
