@@ -14,7 +14,7 @@
             color: #333;
             background-color: #fff;
             margin: 0;
-            padding-top: 60px;
+            padding-top: 40px; /* Reduced from 60px */
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -39,10 +39,16 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 60px;
+            height: 40px; /* Reduced from 60px */
             background-color: #fff;
             z-index: 1000;
             font-family: 'Signifier', sans-serif;
+            transform: translateY(0);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        header.hidden {
+            transform: translateY(-100%);
         }
 
         header nav {
@@ -58,7 +64,7 @@
         header nav a {
             color: #000;
             margin: 0 1.5rem;
-            font-size: 1rem;
+            font-size: 0.875rem; /* Reduced from 1rem */
         }
 
         .max-w-container {
@@ -67,6 +73,7 @@
             padding: 2rem;  
         }
 
+        /* Existing margin classes remain the same */
         .mt-2xl { margin-top: 4rem; }
         .mt-3xl { margin-top: 6rem; }
         .mb-l { margin-bottom: 2rem; }
@@ -75,15 +82,24 @@
         .mb-4xs { margin-bottom: 0.25rem; }
         .mt-v { margin-top: 5rem;} 
         .mb-v { margin-bottom: 5rem;} 
+
+        /* Text classes */
         .text-caption { font-size: 0.875rem; color:#949494;} 
         .text-balance { text-align: center; }
         .text-start { text-align: left; } 
         .text-h1 { font-size: 2.5rem; color: #000; }
         .text-h5 { font-size: 1.5rem; }
         .text-p1-desktop { font-size: 1.125rem; }
-        .toc-content-heading { margin-top: 3rem; }
-        .prose p { margin-bottom: 1rem; } 
 
+        /* Content layout */
+        #main-content {
+            margin-left: calc(15% + 4rem); /* Adjusted to account for sidebar width */
+            width: calc(85% - 4rem);
+            max-width: 800px; /* Added to control content width */
+            margin-right: auto;
+        }
+
+        /* Sidebar styling */
         nav.sidebar {
             position: fixed;
             top: 80px;
@@ -103,53 +119,56 @@
             color: #949494;
             font-size: 0.9rem;
         }
-        nav.sidebar ul li a:hover {
-            color: #000;
+        nav.sidebar ul li a:hover { color: #000; }
+
+        /* Image styling */
+        .single-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            margin: 2rem 0;
+            border-radius: 8px;
         }
 
-        #main-content {
-            margin-left: 18%;
-            width: 82%;
+        /* Image carousel styling */
+        .image-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem 0;
+            overflow: hidden;
         }
 
-        /* Updated image styles */
-.image-container {
-  display: flex;
-  flex-wrap: wrap; /* Allow images to wrap onto multiple lines */
-  gap: 2rem;
-  margin: 2rem 0;
-}
+        .image-carousel {
+            display: flex;
+            transition: transform 0.3s ease;
+            gap: 20px;
+        }
 
-.image-container img { /* Style the images directly within the container */
-  display: block; /* Prevents extra whitespace below images */
-  max-width: 100%; /* Prevents images from exceeding container width */
-  height: auto; /* Maintains aspect ratio */
-  object-fit: cover; /* Covers the entire container, potentially cropping the image */
-  border-radius: 12px; /*Optional: Adds rounded corners*/
-}
+        .image-carousel img {
+            width: 100%;
+            flex: 0 0 100%;
+            height: auto;
+            border-radius: 8px;
+        }
 
-/* Responsive adjustments - adjust breakpoints as needed */
-@media (max-width: 768px) { /* Example breakpoint for tablets */
-  .image-container {
-    gap: 1rem; /* Reduce gap on smaller screens */
-  }
-}
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 2;
+        }
 
-@media (max-width: 576px) { /* Example breakpoint for phones */
-  .image-container {
-    gap: 0.5rem; /* Reduce gap further on smaller screens */
-  }
-  .image-container img {
-    border-radius: 6px; /*Reduce border radius on smaller screens */
-  }
-}
+        .carousel-button.prev { left: 10px; }
+        .carousel-button.next { right: 10px; }
 
-
-/*Optional:  If you want to preserve aspect ratio *without* cropping*/
-.image-container img.object-fit-contain {
-  object-fit: contain; /* Contains the entire image, might add letterboxing */
-}
-
+        /* Button styling remains the same */
         .button-container {
             display: flex;
             justify-content: center;
@@ -171,14 +190,8 @@
             text-decoration: none;
         }
 
-        .paper-button:hover {
-            opacity: 0.9;
-        }
-
-        .paper-button span {
-            display: inline-block;
-            font-size: 1.2rem;
-        }
+        .paper-button:hover { opacity: 0.9; }
+        .paper-button span { display: inline-block; font-size: 1.2rem; }
     </style>
 </head>
 
@@ -218,29 +231,42 @@
                         <h2>The Rising Challenge</h2>
                         <p>The explosive growth of artificial intelligence has brought us powerful tools like ChatGPT and Claude, capable of human-like conversation and complex problem-solving. While these Large Language Models (LLMs) enable helpful applications like chatbots and coding assistants, their capabilities also open concerning possibilities for misuse. Recent research shows that people often accept LLM outputs without scrutiny, making them potential tools for manipulation and deception.</p>
                         <p>As compute power grows exponentially and models become more sophisticated, we're seeing capabilities that were unimaginable just a few years ago. For instance, Anthropic's latest model, Claude 3 Opus, can write arguments as persuasive as human experts. This raises important questions about how these models might be misused for generating misinformation or manipulating public opinion.</p>
-                        <img src="images/figure1.png" alt="Fine-Tuning Diagram" class="single-image">
+                        <div class="single-image-container">
+                            <img src="images/figure1.png" alt="Fine-Tuning Diagram" class="single-image">
+                        </div>
                     </section>
 
                     <section id="testing-vulnerabilities" class="mt-v">
                         <h2>Testing Vulnerabilities</h2>
                         <p>Our research focused on two main approaches to test potential vulnerabilities in publicly available LLMs: jailbreaking and fine-tuning. Jailbreaking involves manipulating the model's context window to override its safety features, while fine-tuning modifies the model's behavior through additional training.</p>
                         <p>We used the Mistral-Medium LLM for jailbreaking tests and Google's Gemini 1.0 Pro for fine-tuning experiments. The tests covered four key categories: manipulation, misinformation, harmful content, and discrimination. For jailbreaking, we gradually increased the context from zero to 256 "shots" (fabricated conversations) to observe how the model's responses changed.</p>
-                        <img src="images/figure2.png" alt="Many-shot Jailbreaking" class="single-image">
+                        <div class="single-image-container">
+                            <img src="images/figure2.png" alt="Many-shot Jailbreaking" class="single-image">
+                        </div>
                     </section>
 
                     <section id="findings" class="mt-v">
                         <h2>What We Found</h2>
                         <p>The results were concerning. With the Mistral-Medium model, we found that using around 32 fabricated conversations was enough to start breaking through its safety features. By the time we reached 256 conversations, the model was generating harmful responses 80% of the time across most categories.</p>
                         <div class="image-container">
-                            <img src="images/figure3.png" alt="Analysis of Jailbreaking Results" class="single-image">
-                            <img src="images/figure4.png" alt="0-shot Context Answer" class="single-image">
-                            <img src="images/figure5.png" alt="256-shot Jailbreak Answer" class="single-image">
+                            <div class="image-carousel">
+                                <img src="images/figure3.png" alt="Analysis of Jailbreaking Results">
+                                <img src="images/figure4.png" alt="0-shot Context Answer">
+                                <img src="images/figure5.png" alt="256-shot Jailbreak Answer">
+                            </div>
+                            <button class="carousel-button prev">←</button>
+                            <button class="carousel-button next">→</button>
                         </div>
                         <p>While more established models like ChatGPT, Claude, and Google Gemini proved resistant to this specific technique, they remain vulnerable to other forms of manipulation. New jailbreaking methods appear regularly online, making it challenging for companies to keep up with patches and fixes.</p>
                         <p>The fine-tuning experiments yielded even more troubling results. After training Google's Gemini 1.0 Pro on a dataset of harmful questions and answers, the model consistently generated dangerous content without any safety warnings. The training process completely overrode the model's original safety measures, as shown by the rapidly decreasing loss rate during fine-tuning.</p>
                         <div class="image-container">
-                            <img src="images/figure6.png" alt="Fine-Tuning Loss/Epochs Graph" class="single-image">
-                            <img src="images/figure7.png" alt="Fine-Tuning Results" class="single-image">
+                            <div class="image-carousel">
+                                <img src="images/figure6.png" alt="Fine-Tuning Loss/Epochs Graph">
+                                <img src="images/figure7.png" alt="Fine-Tuning Results">
+                            </div>
+                            <button class="carousel-button prev" aria-label="Previous image">←</button>
+                            <button class="carousel-button next" aria-label="Next image">→</button>
+                            <div class="carousel-indicators"></div>
                         </div>
                     </section>
 
@@ -271,5 +297,55 @@
         <p>© 2024 Sandeep Srinivas Pogula. All rights reserved.</p>
     </footer>
 
+    <script>
+        // Header hide/show on scroll
+        let lastScroll = 0;
+        const header = document.querySelector('header');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                header.classList.add('hidden');
+            } else {
+                header.classList.remove('hidden');
+            }
+            lastScroll = currentScroll;
+        });
+
+        // Image carousel functionality
+        document.querySelectorAll('.image-container').forEach(container => {
+            const carousel = container.querySelector('.image-carousel');
+            const prevBtn = container.querySelector('.carousel-button.prev');
+            const nextBtn = container.querySelector('.carousel-button.next');
+            let currentIndex = 0;
+            const images = carousel.querySelectorAll('img');
+            const totalImages = images.length;
+
+            if (totalImages <= 1) {
+                if (prevBtn) prevBtn.style.display = 'none';
+                if (nextBtn) nextBtn.style.display = 'none';
+                return;
+            }
+
+            function updateCarousel() {
+                carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+                    updateCarousel();
+                });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    currentIndex = (currentIndex + 1) % totalImages;
+                    updateCarousel();
+                });
+            }
+        });
+    </script>    
+    
 </body>
 </html>
