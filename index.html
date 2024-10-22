@@ -129,6 +129,7 @@
             background: white;
             padding: 20px;
             z-index: 100;
+            display: block;
         }
 
         nav.sidebar ul {
@@ -144,6 +145,12 @@
             font-size: 0.9rem;
         }
         nav.sidebar ul li a:hover { color: #000; }
+
+        @media (max-width: 768px) { /* Adjust breakpoint as needed */
+            nav.sidebar {
+                display: none; /* Hide on smaller screens */
+            }
+        }
 
 /* Updated image styling */
 .single-image-container {
@@ -400,6 +407,19 @@
                 });
             }
         });
+
+        function checkMobile(){
+            const sidebar = document.querySelector('nav.sidebar');
+            if (window.innerWidth <= 768) { // or use a more robust mobile detection method
+                sidebar.style.display = 'none';
+            } else {
+                sidebar.style.display = 'block';
+            }
+        }
+
+        checkMobile(); //Initial check
+        window.addEventListener('resize', checkMobile); //Check on resize
+        
     </script>    
     
 </body>
